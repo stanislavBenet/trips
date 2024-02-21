@@ -62,7 +62,7 @@ const WeatherBanner = observer(() => {
     <section className={containerStyles}>
       <article className={styles.weatherContainer}>
         <h2>{getDayOfWeek(Date.now())}</h2>
-        {todayWeather && todayWeather.days && todayWeather.days.length > 0 ? (
+        {todayWeather && todayWeather.days ? (
           <div className={styles.wrapperWeather}>
             <img
               src={`weathericons/${todayWeather.days[0].icon}.png`}

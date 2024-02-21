@@ -14,13 +14,13 @@ class Weather {
   ];
   weather = null;
   todayWeather = null;
-  localTime = null;
   activeTrip = this.trips[0] || {};
   error = null;
   modalWindow = false;
 
   constructor() {
     makeAutoObservable(this);
+    this.loadState();
   }
 
   handlerModalWindow() {
@@ -30,12 +30,13 @@ class Weather {
   submitModalWindow(values) {
     const newTrip = {
       ...values,
-      image: `cities/${values.city.toLowerCase()}.jpg`, // Предполагается, что значения городов вводятся в нижнем регистре
+      image: `cities/${values.city.toLowerCase()}.jpg`,
       isActive: false,
       id: this.trips.length,
     };
     this.trips.push(newTrip);
     this.modalWindow = false;
+    this.saveState();
   }
 
   toggleCard(id) {
@@ -56,7 +57,6 @@ class Weather {
         throw new Error("Network response was not ok");
       }
       const data = await response.json();
-
       this.weather = data;
     } catch (err) {
       console.error(err);
@@ -68,7 +68,6 @@ class Weather {
   async fetchTodayWeather() {
     const url = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${this.activeTrip.city}/today?unitGroup=metric&include=days&key=${CONSTANTS.API_KEY}&contentType=json`;
     try {
-      console.log("weather fetch");
       const response = await fetch(url);
       if (!response.ok) {
         throw new Error("Network response was not ok");
@@ -78,6 +77,21 @@ class Weather {
     } catch (err) {
       console.error(err);
       this.error = err.message;
+    }
+  }
+
+  saveState() {
+    const state = {
+      trips: this.trips,
+    };
+    localStorage.setItem("weatherStore", JSON.stringify(state));
+  }
+
+  loadState() {
+    const state = localStorage.getItem("weatherStore");
+    if (state) {
+      const parsedState = JSON.parse(state);
+      this.trips = parsedState.trips;
     }
   }
 }

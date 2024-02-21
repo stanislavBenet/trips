@@ -40,7 +40,7 @@ const WeekWeather = observer(() => {
                 alt={i.icon}
               />
               <p>
-                {i.tempmax}°/{i.tempmin}°
+                {Math.round(i.tempmax)}°/{Math.round(i.tempmin)}°
               </p>
             </article>
           );
