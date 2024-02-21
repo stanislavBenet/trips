@@ -1,0 +1,22 @@
+.container {
+  margin: auto;
+  width: 1680px;
+  margin-top: 20px;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.col4 {
+  --size: calc((100% / 12) * 4);
+  flex-basis: var(--size);
+  max-width: var(--size);
+}
+
+.col8 {
+  --size: calc((100% / 12) * 8);
+  flex-basis: var(--size);
+  max-width: var(--size);
+}
