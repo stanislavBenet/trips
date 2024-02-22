@@ -31,7 +31,6 @@ const Trips = observer(() => {
     }
   };
 
-  // Функция для скролла вправо
   const scrollRight = () => {
     if (containerRef.current) {
       containerRef.current.scrollBy({ left: 300, behavior: "smooth" });

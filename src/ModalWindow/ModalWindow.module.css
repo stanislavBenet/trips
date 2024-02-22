@@ -30,8 +30,9 @@
   top: 50px;
   left: 33%;
   border: solid 2px rgba(0, 0, 0, 0.329);
-  box-shadow: 5px 5px 50px 2px;
-  width: 35vw;
+  box-shadow: 10px 5px 50px 2px;
+  min-width: 600px;
+
   height: 60vh;
 }
 
